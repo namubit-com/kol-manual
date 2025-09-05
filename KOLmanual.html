@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-key="title">NAMUBIT KOL System User Guide</title>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f9fa;
+            --border-color: #e9ecef;
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --header-bg: #f8f9fa;
+            --nav-bg: #ffffff;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --card-bg: #2d2d2d;
+            --border-color: #444444;
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --header-bg: #2d2d2d;
+            --nav-bg: #2d2d2d;
+            --shadow: 0 2px 4px rgba(255,255,255,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            background-color: var(--header-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-menu {
+            background: var(--nav-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .nav-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .nav-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: var(--border-color);
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .section {
+            background: var(--card-bg);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            color: var(--text-color);
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
+            background: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            float: left;
+        }
+
+        .step-content {
+            margin-left: 35px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .exchange-list {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .exchange-item {
+            padding: 0.8rem 1.2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .warning-box {
+            background: #332701;
+            border-color: #664d03;
+            color: #ffda6a;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        [data-theme="dark"] .error-box {
+            background: #2c0b0e;
+            border-color: #842029;
+            color: #ea868f;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        [data-theme="dark"] .code-block {
+            background: #2d2d2d;
+            color: #f8f9fa;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .table th {
+            background: var(--header-bg);
+            font-weight: 600;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .nav-list {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exchange-list {
+                flex-wrap: wrap;
+            }
+        }
+    
+
+/* Compact image layout to view image and explanation together */
+figure { text-align:center; }
+figure img { width:60% !important; height:auto !important; margin:8px auto !important; display:block; border:1px solid var(--border-color); border-radius:8px; }
+figure figcaption { font-size:0.9rem; color:#4b5563; margin-bottom:12px; }
+@media (max-width: 768px) {
+  figure img { width:90% !important; }
+}
+
+
+/* Left aligned images at 50% original width */
+figure { text-align:left; }
+figure img { width:50% !important; height:auto !important; margin:8px 0 !important; display:inline-block; border:1px solid var(--border-color); border-radius:8px; }
+figure figcaption { font-size:0.9rem; color:#4b5563; margin:4px 0 12px 0; text-align:left; }
+@media (max-width: 768px) {
+  figure img { width:80% !important; }
+}
+
+
+/* Side-by-side image + caption; images left, 50% width */
+figure { 
+  display: flex; 
+  align-items: flex-start; 
+  gap: 16px; 
+  margin: 12px 0; 
+  text-align: left; 
+}
+figure img { 
+  width: 50% !important; 
+  height: auto !important; 
+  margin: 0 !important; 
+  display: block; 
+  border: 1px solid var(--border-color); 
+  border-radius: 8px; 
+}
+figure figcaption { 
+  flex: 1 1 0; 
+  font-size: 0.95rem; 
+  color: #374151; 
+  line-height: 1.55; 
+  margin: 0; 
+}
+@media (max-width: 768px) {
+  figure { display: block; }
+  figure img { width: 90% !important; }
+  figure figcaption { margin-top: 8px; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-content">
+<div class="logo">
+<i class="fas fa-users"></i>
+<span data-key="title">NAMUBIT KOL System</span>
+</div>
+<div class="controls">
+<div class="lang-buttons">
+<button class="btn active" id="lang-en" onclick="changeLanguage('en')">English</button>
+<button class="btn" id="lang-ja" onclick="changeLanguage('ja')">日本語</button>
+<button class="btn" id="lang-ko" onclick="changeLanguage('ko')">한국어</button>
+</div>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">
+<i class="fas fa-sun" id="theme-icon"></i>
+</button>
+</div>
+</div>
+</header>
+<div class="container">
+<nav class="nav-menu">
+<div class="nav-title" data-key="tableOfContents">Table of Contents</div>
+<div class="nav-list">
+<a class="nav-item" data-key="navOverview" href="#overview">System Overview</a>
+<a class="nav-item" data-key="navLogin" href="#login">Login &amp; Authentication</a>
+<a class="nav-item" href="#dashboard">Home</a>
+<a class="nav-item" data-key="navKolManagement" href="#kol-management">KOL Management</a>
+<a class="nav-item" data-key="navSettlement" href="#settlement">Settlement System</a>
+<a class="nav-item" data-key="navTransfer" href="#transfer">Transfer &amp; Withdrawal</a>
+<a class="nav-item" data-key="navProfile" href="#profile">Profile &amp; Settings</a>
+<a class="nav-item" data-key="navTroubleshooting" href="#troubleshooting">Troubleshooting</a>
+<a class="nav-item" data-key="navFaq" href="#faq">FAQ</a>
+</div>
+</nav>
+<section class="section" id="overview">
+<h2 class="section-title" data-key="systemOverview">System Overview</h2>
+<div class="warning-box">
+<i class="fas fa-info-circle"></i>
+<strong data-key="importantNote">Important:</strong>
+<span data-key="systemDescription">NAMUBIT KOL System is a comprehensive platform for managing Key Opinion Leaders (KOLs) in cryptocurrency trading. This system provides tools for user management, rate configuration, settlement tracking, and financial transactions.</span>
+</div>
+<h3 class="subsection-title" data-key="keyFeatures">Key Features</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-user-shield"></i></div>
+<div class="feature-title" data-key="userManagement">User Management</div>
+<div data-key="userManagementDesc">Secure email-based authentication and KOL hierarchy management</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-percentage"></i></div>
+<div class="feature-title" data-key="rateConfiguration">Rate Configuration</div>
+<div data-key="rateConfigurationDesc">Flexible commission rate settings for different exchange levels</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+<div class="feature-title" data-key="realTimeSettlement">Real-time Settlement</div>
+<div data-key="realTimeSettlementDesc">Live tracking of daily, monthly, and cumulative settlements</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+<div class="feature-title" data-key="secureTransactions">Secure Transactions</div>
+<div data-key="secureTransactionsDesc">2FA-protected transfers and withdrawals with comprehensive audit trails</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="supportedExchanges">Supported Exchanges</h3>
+<div class="exchange-list">
+<div class="exchange-item">Binance</div>
+<div class="exchange-item">OKX</div>
+</div>
+</section>
+<section class="section" id="login">
+<h2 class="section-title" data-key="loginAuthentication">Login &amp; Authentication</h2>
+<div class="warning-box">
+<i class="fas fa-shield-alt"></i>
+<strong data-key="securityNotice">Security Notice:</strong>
+<span data-key="securityMessage">You will be authenticated with email address. Please do not disclose the site address and authentication number to anyone.</span>
+</div><figure><img alt="Login &amp; Authentication" src="images/login.png" style="display:block;"/><figcaption style="margin:0;">로그인 및 인증 / Login &amp; Authentication / ログイン・認証</figcaption></figure>
+<h3 class="subsection-title" data-key="loginProcess">Login Process</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="step1Title">Access the Login Page</strong><br/>
+<span data-key="step1Desc">Navigate to the NAMUBIT KOL login page. You'll see the NAMUBIT logo and language settings at the top.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="step2Title">Enter Email Address</strong><br/>
+<span data-key="step2Desc">Input your registered email address in the email field. This must be the email address associated with your KOL account.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="step3Title">Request Verification Code</strong><br/>
+<span data-key="step3Desc">Click the "Send Verification" button. A 6-digit verification code will be sent to your email address.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="step4Title">Enter Verification Code</strong><br/>
+<span data-key="step4Desc">Check your email and enter the 6-digit verification code in the designated field.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="step5Title">Complete Login</strong><br/>
+<span data-key="step5Desc">Click the "NEXT" button to complete the login process and access the main dashboard.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="dashboard">
+<h2 class="section-title">Home</h2><figure><img alt="Home" src="images/home.png" style="display:block;"/><figcaption style="margin:0;">Home</figcaption></figure>
+<h3 class="subsection-title" data-key="dashboardOverview">Dashboard Overview</h3>
+<p data-key="dashboardDesc">The main dashboard provides a comprehensive view of your KOL activities, assets, and performance metrics. This page is only visible to authenticated KOL users.</p>
+<h3 class="subsection-title" data-key="keyComponents">Key Components</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="referralCode">Referral Code</strong><br/>
+<span data-key="referralCodeDesc">Your unique referral code (4-8 characters, alphanumeric). Use the copy button to share with potential referrals.</span>
+<div class="code-block">AbcD1234EFG</div>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="kolLevel">KOL Level</strong><br/>
+<span data-key="kolLevelDesc">Your current KOL level status (e.g., KOL 0, KOL 1, etc.)</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="assetOverview">Asset Overview</strong><br/>
+<span data-key="assetOverviewDesc">View your USDT holdings across different exchanges with withdraw buttons for each.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="settlementAmounts">Settlement Amounts</strong><br/>
+<span data-key="settlementAmountsDesc">Real-time display of today's settlement amounts with up/down indicators compared to previous day.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="kolStatus">KOL Status</strong><br/>
+<span data-key="kolStatusDesc">Overview of your sub-KOLs and traders with expandable details and management options.</span>
+</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="quickActions">Quick Actions</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<div class="feature-title" data-key="rateSettingButton">Rate Setting</div>
+<div data-key="rateSettingButtonDesc">Click to open modal for setting commission rates for your KOLs</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="registButton">Registration</div>
+<div data-key="registButtonDesc">Register new KOLs under your hierarchy with custom codes and rates</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="withdrawButton">Withdraw</div>
+<div data-key="withdrawButtonDesc">Access withdrawal functions for each supported exchange</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="detailButton">Detail</div>
+<div data-key="detailButtonDesc">View comprehensive settlement and transaction details</div>
+</div>
+</div>
+</section>
+<section class="section" id="kol-management">
+<h2 class="section-title" data-key="kolManagement">KOL Management</h2><figure><img alt="KOL(하단 탭): KOL/Traders 현황 (마스킹)" src="images/kol_bottom_tab_.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">KOL(하단 탭): KOL/Traders 현황 (마스킹)</figcaption></figure><figure><img alt="KOL(우측 상단 버튼): 비율 설정 (마스킹)" src="images/kol_top_button_.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">KOL(우측 상단 버튼): 비율 설정 (마스킹)</figcaption></figure>
+<h3 class="subsection-title" data-key="rateConfiguration">Rate Configuration</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="openRateModal">Open Rate Setting Modal</strong><br/>
+<span data-key="openRateModalDesc">Click the "Rate Setting" button on the dashboard to open the commission rate configuration modal.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="enterNamubitId">Enter NAMUBIT ID</strong><br/>
+<span data-key="enterNamubitIdDesc">Input the 6-digit numeric NAMUBIT ID of the KOL you want to configure rates for.</span>
+<div class="error-box">
+<strong data-key="restriction">Restriction:</strong> <span data-key="namubitIdRestriction">You can only enter 6 digits.</span>
+</div>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="configureRates">Configure Rates</strong><br/>
+<span data-key="configureRatesDesc">Set commission rates for each exchange. The ME(%) is automatically calculated as Total(%) - KOL(%).</span>
+<table class="table">
+<thead>
+<tr>
+<th data-key="exchange">Exchange</th>
+<th data-key="totalPercent">Total (%)</th>
+<th data-key="mePercent">ME (%)</th>
+<th data-key="kolPercent">KOL (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binance</td>
+<td>25%</td>
+<td data-key="autoCalculated">Auto-calculated</td>
+<td data-key="userInput">User Input</td>
+</tr>
+<tr>
+<td>OKX</td>
+<td>35%</td>
+<td data-key="autoCalculated">Auto-calculated</td>
+<td data-key="userInput">User Input</td>
+</tr>
+</tbody>
+</table>
+<div class="error-box">
+<strong data-key="rateError">Rate Error:</strong> <span data-key="rateErrorMessage">The value of Total (%) cannot be exceeded.</span>
+</div>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="verificationCode">Verification Code</strong><br/>
+<span data-key="verificationCodeDesc">Click "Send" to receive a verification code via email, then enter it to apply the rate changes.</span>
+<div class="error-box">
+<strong data-key="codeError">Code Error:</strong> <span data-key="codeErrorMessage">Invalid verification code. Please re-enter.</span>
+</div>
+</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="kolRegistration">KOL Registration</h3><figure><img alt="Regist: 신규 KOL 등록" src="images/regist.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">Regist: 신규 KOL 등록</figcaption></figure>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="openRegistModal">Open Registration Modal</strong><br/>
+<span data-key="openRegistModalDesc">Click the "Regist" button to open the KOL registration modal.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="enterKolId">Enter KOL Information</strong><br/>
+<span data-key="enterKolIdDesc">Input the 6-digit NAMUBIT ID and create a unique KOL code (4-8 characters, alphanumeric only).</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="setInitialRates">Set Initial Rates</strong><br/>
+<span data-key="setInitialRatesDesc">Configure the initial commission rates for the new KOL using the same process as rate configuration.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="confirmRegistration">Confirm Registration</strong><br/>
+<span data-key="confirmRegistrationDesc">Complete the registration with email verification code confirmation.</span>
+</div>
+</div>
+</div>
+</section><section class="section" id="settlement">
+<h2 class="section-title" data-key="settlementSystem">Settlement System</h2><figure><img alt="Settlement: 일/월/누적 정산 및 달력" src="images/settlement.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">Settlement: 일/월/누적 정산 및 달력</figcaption></figure>
+<h3 class="subsection-title" data-key="settlementOverview">Settlement Overview</h3>
+<p data-key="settlementOverviewDesc">The settlement system provides comprehensive tracking of all financial activities with precise 4-decimal place accuracy for all USDT amounts.</p>
+<h3 class="subsection-title" data-key="settlementTypes">Settlement Types</h3>
+<div class="feature-grid">
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-calendar-day"></i></div>
+<div class="feature-title" data-key="todaysSettlement">Today's Settlement</div>
+<div data-key="todaysSettlementDesc">Real-time settlement amount for the current day with up/down indicators</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+<div class="feature-title" data-key="monthlySettlement">Monthly Settlement</div>
+<div data-key="monthlySettlementDesc">Aggregated settlement data for the selected month</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+<div class="feature-title" data-key="cumulativeSettlement">Cumulative Settlement</div>
+<div data-key="cumulativeSettlementDesc">Total settlement amount across all time periods</div>
+</div>
+<div class="feature-card">
+<div class="feature-icon"><i class="fas fa-building"></i></div>
+<div class="feature-title" data-key="exchangeSettlement">Exchange Settlement</div>
+<div data-key="exchangeSettlementDesc">Settlement amounts broken down by individual exchanges</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="searchAndFilter">Search and Filter</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="yearMonthSearch">Year/Month Search</strong><br/>
+<span data-key="yearMonthSearchDesc">Use dropdown menus to select specific year and month for settlement data retrieval.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="exchangeFilter">Exchange Filter</strong><br/>
+<span data-key="exchangeFilterDesc">View settlement data filtered by specific exchanges (Binance, OKX).</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="dataTable">Data Table</strong><br/>
+<span data-key="dataTableDesc">Settlement data is displayed in a comprehensive table format with date, total amount, and exchange-specific breakdowns.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="transfer">
+<h2 class="section-title" data-key="transferWithdrawal">Transfer &amp; Withdrawal</h2><figure><img alt="Withdraw: 거래소 선택" src="images/withdraw.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">Withdraw: 거래소 선택</figcaption></figure>
+<h3 class="subsection-title" data-key="transferUsdt">Transfer USDT</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="selectRecipient">Select Recipient</strong><br/>
+<span data-key="selectRecipientDesc">Choose the recipient from your KOL network using their NAMUBIT ID and KOL Code.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="chooseExchange">Choose Withdrawal Exchange</strong><br/>
+<span data-key="chooseExchangeDesc">Select the exchange from which you want to transfer funds (Binance or OKX).</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="enterAmount">Enter Amount</strong><br/>
+<span data-key="enterAmountDesc">Input the USDT amount to transfer. Ensure you have sufficient balance including fees.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="confirmTransfer">Confirm Transfer</strong><br/>
+<span data-key="confirmTransferDesc">Complete the transfer with email verification code authentication.</span>
+</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="withdrawalProcess">Withdrawal Process</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="selectWithdrawExchange">Select Exchange</strong><br/>
+<span data-key="selectWithdrawExchangeDesc">Click the "Withdraw" button for your desired exchange (Binance or OKX).</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="checkBalance">Check Balance</strong><br/>
+<span data-key="checkBalanceDesc">Review your available USDT balance and deposit information for the selected exchange.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="selectNetwork">Select Network</strong><br/>
+<span data-key="selectNetworkDesc">Choose the blockchain network for your withdrawal from the dropdown menu.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="enterAddress">Enter Withdrawal Address</strong><br/>
+<span data-key="enterAddressDesc">Input the destination wallet address and Tag (if required by the network).</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="setWithdrawAmount">Set Withdrawal Amount</strong><br/>
+<span data-key="setWithdrawAmountDesc">Enter the withdrawal amount (minimum 10 USDT). Review the network fees.</span>
+<div class="warning-box">
+<strong data-key="minimumAmount">Minimum Amount:</strong> <span data-key="minimumAmountDesc">10 USDT minimum withdrawal required</span>
+</div>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="executeWithdrawal">Execute Withdrawal</strong><br/>
+<span data-key="executeWithdrawalDesc">Complete the withdrawal process with verification code authentication.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="profile">
+<h2 class="section-title" data-key="profileSettings">Profile &amp; Settings</h2><figure><img alt="Profile: 계정 정보(개인정보 마스킹)" src="images/profile.png" style="display:block;"/><figcaption style="font-size:0.9rem;color:#4b5563;margin-bottom:16px;">Profile: 계정 정보(개인정보 마스킹)</figcaption></figure>
+<h3 class="subsection-title" data-key="profileInformation">Profile Information</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="viewProfile">View Profile</strong><br/>
+<span data-key="viewProfileDesc">Access your profile to view UID, nickname, email, mobile number, and join date.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="profileManagement">Profile Management</strong><br/>
+<span data-key="profileManagementDesc">Currently view-only. Profile editing functionality will be available in future updates.</span>
+</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="transactionHistory">Transaction History</h3>
+<p data-key="transactionHistoryDesc">Access comprehensive records of all your activities through organized history tabs:</p>
+<div class="feature-grid">
+<div class="feature-card">
+<div class="feature-title" data-key="settlementHistory">Settlement History</div>
+<div data-key="settlementHistoryDesc">Complete record of all settlement transactions with timestamps and amounts</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="tradingHistory">Trading History</div>
+<div data-key="tradingHistoryDesc">Detailed trading activity logs with volume and exchange information</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="transferHistory">Transfer History</div>
+<div data-key="transferHistoryDesc">Record of all USDT transfers between KOL network members</div>
+</div>
+<div class="feature-card">
+<div class="feature-title" data-key="withdrawalHistory">Withdrawal History</div>
+<div data-key="withdrawalHistoryDesc">Complete log of all withdrawal transactions with network and address details</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="preferences">Preferences</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="themeSettings">Theme Settings</strong><br/>
+<span data-key="themeSettingsDesc">Toggle between Light and Dark mode themes for optimal viewing experience.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="salesTypeSettings">Sales Type Settings</strong><br/>
+<span data-key="salesTypeSettingsDesc">Enable or disable KOL sales type functionality.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="logoutOption">Logout</strong><br/>
+<span data-key="logoutOptionDesc">Securely end your session and return to the login page.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="troubleshooting">
+<h2 class="section-title" data-key="troubleshooting">Troubleshooting</h2>
+<h3 class="subsection-title" data-key="commonIssues">Common Issues</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="loginProblems">Login Problems</strong><br/>
+<span data-key="loginProblemsDesc">If you cannot receive verification codes, check your email spam folder and ensure your email address is correctly registered.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="rateConfigIssues">Rate Configuration Issues</strong><br/>
+<span data-key="rateConfigIssuesDesc">Ensure KOL percentages don't exceed the Total percentage limits for each exchange.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="withdrawalIssues">Withdrawal Issues</strong><br/>
+<span data-key="withdrawalIssuesDesc">Verify you meet the minimum withdrawal amount (10 USDT) and have sufficient balance including network fees.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="dataDisplayIssues">Data Display Issues</strong><br/>
+<span data-key="dataDisplayIssuesDesc">If settlement or transaction data appears empty, try refreshing the page or selecting a different time period.</span>
+</div>
+</div>
+</div>
+<h3 class="subsection-title" data-key="errorMessages">Error Messages</h3>
+<div class="error-box">
+<strong data-key="namubitIdError">"You can only enter 6 digits."</strong><br/>
+<span data-key="namubitIdErrorDesc">NAMUBIT ID must be exactly 6 numeric digits. Remove any letters or extra numbers.</span>
+</div>
+<div class="error-box">
+<strong data-key="percentageError">"The value of Total (%) cannot be exceeded."</strong><br/>
+<span data-key="percentageErrorDesc">KOL commission percentage cannot be higher than the Total percentage set for each exchange.</span>
+</div>
+<div class="error-box">
+<strong data-key="verificationError">"Invalid verification code. Please re-enter."</strong><br/>
+<span data-key="verificationErrorDesc">The verification code may have expired or been entered incorrectly. Request a new code.</span>
+</div>
+</section>
+<section class="section" id="faq">
+<h2 class="section-title" data-key="faq">FAQ</h2>
+<h3 class="subsection-title" data-key="generalQuestions">General Questions</h3>
+<div class="step-list">
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq1Q">What is a KOL in NAMUBIT system?</strong><br/>
+<span data-key="faq1A">KOL (Key Opinion Leader) is a user who can invite and manage other users, earning commissions from their trading activities across supported exchanges.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq2Q">Which exchanges are supported?</strong><br/>
+<span data-key="faq2A">Currently, NAMUBIT KOL system supports Binance and OKX exchanges, with more exchanges planned for future integration.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq3Q">How are commissions calculated?</strong><br/>
+<span data-key="faq3A">Commissions are calculated as: Total (%) - KOL (%) = ME (%). You set the KOL percentage, and your earnings (ME) are automatically calculated.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq4Q">What is the minimum withdrawal amount?</strong><br/>
+<span data-key="faq4A">The minimum withdrawal amount is 10 USDT, plus applicable network fees depending on the selected blockchain network.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq5Q">How do I reset my verification code?</strong><br/>
+<span data-key="faq5A">Click the "Send" button again to receive a new verification code. Each code expires after a certain time period for security purposes.</span>
+</div>
+</div>
+<div class="step-item">
+<div class="step-content">
+<strong data-key="faq6Q">Can I change my KOL rates after setting them?</strong><br/>
+<span data-key="faq6A">Yes, you can modify KOL commission rates at any time through the rate setting modal, but changes require email verification for security.</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+<i class="fas fa-arrow-up"></i>
+</button>
+<script>
+        // Translation data
+        const translations = {
+            en: {
+                title: "NAMUBIT KOL System",
+                tableOfContents: "Table of Contents",
+                navOverview: "System Overview",
+                navLogin: "Login & Authentication",
+                navDashboard: "Main Dashboard",
+                navKolManagement: "KOL Management",
+                navSettlement: "Settlement System",
+                navTransfer: "Transfer & Withdrawal",
+                navProfile: "Profile & Settings",
+                navTroubleshooting: "Troubleshooting",
+                navFaq: "FAQ",
+                systemOverview: "System Overview",
+                importantNote: "Important:",
+                systemDescription: "NAMUBIT KOL System is a comprehensive platform for managing Key Opinion Leaders (KOLs) in cryptocurrency trading. This system provides tools for user management, rate configuration, settlement tracking, and financial transactions.",
+                keyFeatures: "Key Features",
+                userManagement: "User Management",
+                userManagementDesc: "Secure email-based authentication and KOL hierarchy management",
+                rateConfiguration: "Rate Configuration",
+                rateConfigurationDesc: "Flexible commission rate settings for different exchange levels",
+                realTimeSettlement: "Real-time Settlement",
+                realTimeSettlementDesc: "Live tracking of daily, monthly, and cumulative settlements",
+                secureTransactions: "Secure Transactions",
+                secureTransactionsDesc: "2FA-protected transfers and withdrawals with comprehensive audit trails",
+                supportedExchanges: "Supported Exchanges",
+                loginAuthentication: "Login & Authentication",
+                securityNotice: "Security Notice:",
+                securityMessage: "You will be authenticated with email address. Please do not disclose the site address and authentication number to anyone.",
+                loginProcess: "Login Process",
+                step1Title: "Access the Login Page",
+                step1Desc: "Navigate to the NAMUBIT KOL login page. You'll see the NAMUBIT logo and language settings at the top.",
+                step2Title: "Enter Email Address",
+                step2Desc: "Input your registered email address in the email field. This must be the email address associated with your KOL account.",
+                step3Title: "Request Verification Code",
+                step3Desc: "Click the \"Send Verification\" button. A 6-digit verification code will be sent to your email address.",
+                step4Title: "Enter Verification Code",
+                step4Desc: "Check your email and enter the 6-digit verification code in the designated field.",
+                step5Title: "Complete Login",
+                step5Desc: "Click the \"NEXT\" button to complete the login process and access the main dashboard.",
+                mainDashboard: "Main Dashboard",
+                dashboardOverview: "Dashboard Overview",
+                dashboardDesc: "The main dashboard provides a comprehensive view of your KOL activities, assets, and performance metrics. This page is only visible to authenticated KOL users.",
+                keyComponents: "Key Components",
+                referralCode: "Referral Code",
+                referralCodeDesc: "Your unique referral code (4-8 characters, alphanumeric). Use the copy button to share with potential referrals.",
+                kolLevel: "KOL Level",
+                kolLevelDesc: "Your current KOL level status (e.g., KOL 0, KOL 1, etc.)",
+                assetOverview: "Asset Overview",
+                assetOverviewDesc: "View your USDT holdings across different exchanges with withdraw buttons for each.",
+                settlementAmounts: "Settlement Amounts",
+                settlementAmountsDesc: "Real-time display of today's settlement amounts with up/down indicators compared to previous day.",
+                kolStatus: "KOL Status",
+                kolStatusDesc: "Overview of your sub-KOLs and traders with expandable details and management options.",
+                quickActions: "Quick Actions",
+                rateSettingButton: "Rate Setting",
+                rateSettingButtonDesc: "Click to open modal for setting commission rates for your KOLs",
+                registButton: "Registration",
+                registButtonDesc: "Register new KOLs under your hierarchy with custom codes and rates",
+                withdrawButton: "Withdraw",
+                withdrawButtonDesc: "Access withdrawal functions for each supported exchange",
+                detailButton: "Detail",
+                detailButtonDesc: "View comprehensive settlement and transaction details",
+                kolManagement: "KOL Management",
+                openRateModal: "Open Rate Setting Modal",
+                openRateModalDesc: "Click the \"Rate Setting\" button on the dashboard to open the commission rate configuration modal.",
+                enterNamubitId: "Enter NAMUBIT ID",
+                enterNamubitIdDesc: "Input the 6-digit numeric NAMUBIT ID of the KOL you want to configure rates for.",
+                restriction: "Restriction:",
+                namubitIdRestriction: "You can only enter 6 digits.",
+                configureRates: "Configure Rates",
+                configureRatesDesc: "Set commission rates for each exchange. The ME(%) is automatically calculated as Total(%) - KOL(%).",
+                exchange: "Exchange",
+                totalPercent: "Total (%)",
+                mePercent: "ME (%)",
+                kolPercent: "KOL (%)",
+                autoCalculated: "Auto-calculated",
+                userInput: "User Input",
+                rateError: "Rate Error:",
+                rateErrorMessage: "The value of Total (%) cannot be exceeded.",
+                verificationCode: "Verification Code",
+                verificationCodeDesc: "Click \"Send\" to receive a verification code via email, then enter it to apply the rate changes.",
+                codeError: "Code Error:",
+                codeErrorMessage: "Invalid verification code. Please re-enter.",
+                kolRegistration: "KOL Registration",
+                openRegistModal: "Open Registration Modal",
+                openRegistModalDesc: "Click the \"Regist\" button to open the KOL registration modal.",
+                enterKolId: "Enter KOL Information",
+                enterKolIdDesc: "Input the 6-digit NAMUBIT ID and create a unique KOL code (4-8 characters, alphanumeric only).",
+                setInitialRates: "Set Initial Rates",
+                setInitialRatesDesc: "Configure the initial commission rates for the new KOL using the same process as rate configuration.",
+                confirmRegistration: "Confirm Registration",
+                confirmRegistrationDesc: "Complete the registration with email verification code confirmation.",
+                settlementSystem: "Settlement System",
+                settlementOverview: "Settlement Overview",
+                settlementOverviewDesc: "The settlement system provides comprehensive tracking of all financial activities with precise 4-decimal place accuracy for all USDT amounts.",
+                settlementTypes: "Settlement Types",
+                todaysSettlement: "Today's Settlement",
+                todaysSettlementDesc: "Real-time settlement amount for the current day with up/down indicators",
+                monthlySettlement: "Monthly Settlement",
+                monthlySettlementDesc: "Aggregated settlement data for the selected month",
+                cumulativeSettlement: "Cumulative Settlement",
+                cumulativeSettlementDesc: "Total settlement amount across all time periods",
+                exchangeSettlement: "Exchange Settlement",
+                exchangeSettlementDesc: "Settlement amounts broken down by individual exchanges",
+                searchAndFilter: "Search and Filter",
+                yearMonthSearch: "Year/Month Search",
+                yearMonthSearchDesc: "Use dropdown menus to select specific year and month for settlement data retrieval.",
+                exchangeFilter: "Exchange Filter",
+                exchangeFilterDesc: "View settlement data filtered by specific exchanges (Binance, OKX).",
+                dataTable: "Data Table",
+                dataTableDesc: "Settlement data is displayed in a comprehensive table format with date, total amount, and exchange-specific breakdowns.",
+                transferWithdrawal: "Transfer & Withdrawal",
+                transferUsdt: "Transfer USDT",
+                selectRecipient: "Select Recipient",
+                selectRecipientDesc: "Choose the recipient from your KOL network using their NAMUBIT ID and KOL Code.",
+                chooseExchange: "Choose Withdrawal Exchange",
+                chooseExchangeDesc: "Select the exchange from which you want to transfer funds (Binance or OKX).",
+                enterAmount: "Enter Amount",
+                enterAmountDesc: "Input the USDT amount to transfer. Ensure you have sufficient balance including fees.",
+                confirmTransfer: "Confirm Transfer",
+                confirmTransferDesc: "Complete the transfer with email verification code authentication.",
+                withdrawalProcess: "Withdrawal Process",
+                selectWithdrawExchange: "Select Exchange",
+                selectWithdrawExchangeDesc: "Click the \"Withdraw\" button for your desired exchange (Binance or OKX).",
+                checkBalance: "Check Balance",
+                checkBalanceDesc: "Review your available USDT balance and deposit information for the selected exchange.",
+                selectNetwork: "Select Network",
+                selectNetworkDesc: "Choose the blockchain network for your withdrawal from the dropdown menu.",
+                enterAddress: "Enter Withdrawal Address",
+                enterAddressDesc: "Input the destination wallet address and Tag (if required by the network).",
+                setWithdrawAmount: "Set Withdrawal Amount",
+                setWithdrawAmountDesc: "Enter the withdrawal amount (minimum 10 USDT). Review the network fees.",
+                minimumAmount: "Minimum Amount:",
+                minimumAmountDesc: "10 USDT minimum withdrawal required",
+                executeWithdrawal: "Execute Withdrawal",
+                executeWithdrawalDesc: "Complete the withdrawal process with verification code authentication.",
+                profileSettings: "Profile & Settings",
+                profileInformation: "Profile Information",
+                viewProfile: "View Profile",
+                viewProfileDesc: "Access your profile to view UID, nickname, email, mobile number, and join date.",
+                profileManagement: "Profile Management",
+                profileManagementDesc: "Currently view-only. Profile editing functionality will be available in future updates.",
+                transactionHistory: "Transaction History",
+                transactionHistoryDesc: "Access comprehensive records of all your activities through organized history tabs:",
+                settlementHistory: "Settlement History",
+                settlementHistoryDesc: "Complete record of all settlement transactions with timestamps and amounts",
+                tradingHistory: "Trading History",
+                tradingHistoryDesc: "Detailed trading activity logs with volume and exchange information",
+                transferHistory: "Transfer History",
+                transferHistoryDesc: "Record of all USDT transfers between KOL network members",
+                withdrawalHistory: "Withdrawal History",
+                withdrawalHistoryDesc: "Complete log of all withdrawal transactions with network and address details",
+                preferences: "Preferences",
+                themeSettings: "Theme Settings",
+                themeSettingsDesc: "Toggle between Light and Dark mode themes for optimal viewing experience.",
+                salesTypeSettings: "Sales Type Settings",
+                salesTypeSettingsDesc: "Enable or disable KOL sales type functionality.",
+                logoutOption: "Logout",
+                logoutOptionDesc: "Securely end your session and return to the login page.",
+                troubleshooting: "Troubleshooting",
+                commonIssues: "Common Issues",
+                loginProblems: "Login Problems",
+                loginProblemsDesc: "If you cannot receive verification codes, check your email spam folder and ensure your email address is correctly registered.",
+                rateConfigIssues: "Rate Configuration Issues",
+                rateConfigIssuesDesc: "Ensure KOL percentages don't exceed the Total percentage limits for each exchange.",
+                withdrawalIssues: "Withdrawal Issues",
+                withdrawalIssuesDesc: "Verify you meet the minimum withdrawal amount (10 USDT) and have sufficient balance including network fees.",
+                dataDisplayIssues: "Data Display Issues",
+                dataDisplayIssuesDesc: "If settlement or transaction data appears empty, try refreshing the page or selecting a different time period.",
+                errorMessages: "Error Messages",
+                namubitIdError: "\"You can only enter 6 digits.\"",
+                namubitIdErrorDesc: "NAMUBIT ID must be exactly 6 numeric digits. Remove any letters or extra numbers.",
+                percentageError: "\"The value of Total (%) cannot be exceeded.\"",
+                percentageErrorDesc: "KOL commission percentage cannot be higher than the Total percentage set for each exchange.",
+                verificationError: "\"Invalid verification code. Please re-enter.\"",
+                verificationErrorDesc: "The verification code may have expired or been entered incorrectly. Request a new code.",
+                faq: "FAQ",
+                generalQuestions: "General Questions",
+                faq1Q: "What is a KOL in NAMUBIT system?",
+                faq1A: "KOL (Key Opinion Leader) is a user who can invite and manage other users, earning commissions from their trading activities across supported exchanges.",
+                faq2Q: "Which exchanges are supported?",
+                faq2A: "Currently, NAMUBIT KOL system supports Binance and OKX exchanges, with more exchanges planned for future integration.",
+                faq3Q: "How are commissions calculated?",
+                faq3A: "Commissions are calculated as: Total (%) - KOL (%) = ME (%). You set the KOL percentage, and your earnings (ME) are automatically calculated.",
+                faq4Q: "What is the minimum withdrawal amount?",
+                faq4A: "The minimum withdrawal amount is 10 USDT, plus applicable network fees depending on the selected blockchain network.",
+                faq5Q: "How do I reset my verification code?",
+                faq5A: "Click the \"Send\" button again to receive a new verification code. Each code expires after a certain time period for security purposes.",
+                faq6Q: "Can I change my KOL rates after setting them?",
+                faq6A: "Yes, you can modify KOL commission rates at any time through the rate setting modal, but changes require email verification for security."
+            },
+            ja: {
+                title: "NAMUBIT KOLシステム",
+                tableOfContents: "目次",
+                navOverview: "システム概要",
+                navLogin: "ログイン・認証",
+                navDashboard: "メインダッシュボード",
+                navKolManagement: "KOL管理",
+                navSettlement: "決済システム",
+                navTransfer: "送金・出金",
+                navProfile: "プロフィール・設定",
+                navTroubleshooting: "トラブルシューティング",
+                navFaq: "よくある質問",
+                systemOverview: "システム概要",
+                importantNote: "重要:",
+                systemDescription: "NAMUBIT KOLシステムは、仮想通貨取引におけるキーオピニオンリーダー（KOL）を管理するための包括的プラットフォームです。このシステムは、ユーザー管理、レート設定、決済追跡、金融取引のためのツールを提供します。",
+                keyFeatures: "主要機能",
+                userManagement: "ユーザー管理",
+                userManagementDesc: "安全なメール認証とKOL階層管理",
+                rateConfiguration: "レート設定",
+                rateConfigurationDesc: "異なる取引所レベルでの柔軟な手数料率設定",
+                realTimeSettlement: "リアルタイム決済",
+                realTimeSettlementDesc: "日次、月次、累積決済のライブ追跡",
+                secureTransactions: "安全な取引",
+                secureTransactionsDesc: "2FA保護された送金・出金と包括的監査証跡",
+                supportedExchanges: "対応取引所",
+                loginAuthentication: "ログイン・認証",
+                securityNotice: "セキュリティ通知:",
+                securityMessage: "メールアドレスで認証されます。サイトアドレスと認証番号を他人に開示しないでください。",
+                loginProcess: "ログインプロセス",
+                step1Title: "ログインページにアクセス",
+                step1Desc: "NAMUBIT KOLログインページに移動します。上部にNAMUBITロゴと言語設定が表示されます。",
+                step2Title: "メールアドレスを入力",
+                step2Desc: "メールフィールドに登録されたメールアドレスを入力します。これはKOLアカウントに関連付けられたメールアドレスである必要があります。",
+                step3Title: "認証コードを要求",
+                step3Desc: "「認証コード送信」ボタンをクリックします。6桁の認証コードがメールアドレスに送信されます。",
+                step4Title: "認証コードを入力",
+                step4Desc: "メールを確認し、指定されたフィールドに6桁の認証コードを入力します。",
+                step5Title: "ログイン完了",
+                step5Desc: "「次へ」ボタンをクリックしてログインプロセスを完了し、メインダッシュボードにアクセスします。",
+                mainDashboard: "メインダッシュボード",
+                dashboardOverview: "ダッシュボード概要",
+                dashboardDesc: "メインダッシュボードは、KOL活動、資産、パフォーマンス指標の包括的なビューを提供します。このページは認証されたKOLユーザーのみに表示されます。",
+                keyComponents: "主要コンポーネント",
+                referralCode: "紹介コード",
+                referralCodeDesc: "あなた固有の紹介コード（4-8文字、英数字）。コピーボタンを使用して潜在的な紹介者と共有します。",
+                kolLevel: "KOLレベル",
+                kolLevelDesc: "現在のKOLレベルステータス（例：KOL 0、KOL 1など）",
+                assetOverview: "資産概要",
+                assetOverviewDesc: "各取引所のUSDT保有量を確認し、それぞれに出金ボタンがあります。",
+                settlementAmounts: "決済金額",
+                settlementAmountsDesc: "前日比較での上昇/下降インジケーターを含む今日の決済金額のリアルタイム表示。",
+                kolStatus: "KOLステータス",
+                kolStatusDesc: "展開可能な詳細と管理オプション付きのサブKOLとトレーダーの概要。",
+                quickActions: "クイックアクション",
+                rateSettingButton: "レート設定",
+                rateSettingButtonDesc: "KOLの手数料率設定用モーダルを開くためにクリック",
+                registButton: "登録",
+                registButtonDesc: "カスタムコードとレートで階層下に新しいKOLを登録",
+                withdrawButton: "出金",
+                withdrawButtonDesc: "サポートされている各取引所の出金機能にアクセス",
+                detailButton: "詳細",
+                detailButtonDesc: "包括的な決済と取引の詳細を表示",
+                kolManagement: "KOL管理",
+                openRateModal: "レート設定モーダルを開く",
+                openRateModalDesc: "ダッシュボードの「レート設定」ボタンをクリックして手数料率設定モーダルを開きます。",
+                enterNamubitId: "NAMUBIT IDを入力",
+                enterNamubitIdDesc: "レートを設定したいKOLの6桁数字のNAMUBIT IDを入力します。",
+                restriction: "制限:",
+                namubitIdRestriction: "6桁の数字のみ入力できます。",
+                configureRates: "レート設定",
+                configureRatesDesc: "各取引所の手数料率を設定します。ME（％）はTotal（％）- KOL（％）として自動計算されます。",
+                exchange: "取引所",
+                totalPercent: "合計（％）",
+                mePercent: "ME（％）",
+                kolPercent: "KOL（％）",
+                autoCalculated: "自動計算",
+                userInput: "ユーザー入力",
+                rateError: "レートエラー:",
+                rateErrorMessage: "合計（％）の値を超えることはできません。",
+                verificationCode: "認証コード",
+                verificationCodeDesc: "「送信」をクリックしてメールで認証コードを受け取り、それを入力してレート変更を適用します。",
+                codeError: "コードエラー:",
+                codeErrorMessage: "無効な認証コードです。再入力してください。",
+                kolRegistration: "KOL登録",
+                openRegistModal: "登録モーダルを開く",
+                openRegistModalDesc: "「登録」ボタンをクリックしてKOL登録モーダルを開きます。",
+                enterKolId: "KOL情報を入力",
+                enterKolIdDesc: "6桁のNAMUBIT IDを入力し、固有のKOLコード（4-8文字、英数字のみ）を作成します。",
+                setInitialRates: "初期レートを設定",
+                setInitialRatesDesc: "レート設定と同じプロセスを使用して新しいKOLの初期手数料率を設定します。",
+                confirmRegistration: "登録確認",
+                confirmRegistrationDesc: "メール認証コード確認で登録を完了します。",
+                settlementSystem: "決済システム",
+                settlementOverview: "決済概要",
+                settlementOverviewDesc: "決済システムは、すべてのUSDT金額に対して正確な小数点以下4桁の精度で、すべての金融活動の包括的な追跡を提供します。",
+                settlementTypes: "決済タイプ",
+                todaysSettlement: "今日の決済",
+                todaysSettlementDesc: "上昇/下降インジケーター付きの当日のリアルタイム決済金額",
+                monthlySettlement: "月次決済",
+                monthlySettlementDesc: "選択された月の集計決済データ",
+                cumulativeSettlement: "累積決済",
+                cumulativeSettlementDesc: "全期間にわたる総決済金額",
+                exchangeSettlement: "取引所別決済",
+                exchangeSettlementDesc: "個別取引所ごとに分解された決済金額",
+                searchAndFilter: "検索とフィルター",
+                yearMonthSearch: "年/月検索",
+                yearMonthSearchDesc: "ドロップダウンメニューを使用して決済データ取得のために特定の年と月を選択します。",
+                exchangeFilter: "取引所フィルター",
+                exchangeFilterDesc: "特定の取引所（Binance、OKX）でフィルターされた決済データを表示します。",
+                dataTable: "データテーブル",
+                dataTableDesc: "決済データは、日付、総額、取引所別内訳を含む包括的なテーブル形式で表示されます。",
+                transferWithdrawal: "送金・出金",
+                transferUsdt: "USDT送金",
+                selectRecipient: "受取人を選択",
+                selectRecipientDesc: "NAMUBIT IDとKOLコードを使用してKOLネットワークから受取人を選択します。",
+                chooseExchange: "出金取引所を選択",
+                chooseExchangeDesc: "資金を送金したい取引所（BinanceまたはOKX）を選択します。",
+                enterAmount: "金額を入力",
+                enterAmountDesc: "送金するUSDT金額を入力します。手数料を含む十分な残高があることを確認してください。",
+                confirmTransfer: "送金確認",
+                confirmTransferDesc: "メール認証コード認証で送金を完了します。",
+                withdrawalProcess: "出金プロセス",
+                selectWithdrawExchange: "取引所を選択",
+                selectWithdrawExchangeDesc: "希望する取引所（BinanceまたはOKX）の「出金」ボタンをクリックします。",
+                checkBalance: "残高確認",
+                checkBalanceDesc: "選択した取引所の利用可能なUSDT残高と入金情報を確認します。",
+                selectNetwork: "ネットワークを選択",
+                selectNetworkDesc: "ドロップダウンメニューから出金のブロックチェーンネットワークを選択します。",
+                enterAddress: "出金アドレスを入力",
+                enterAddressDesc: "宛先ウォレットアドレスとタグ（ネットワークで必要な場合）を入力します。",
+                setWithdrawAmount: "出金金額を設定",
+                setWithdrawAmountDesc: "出金金額を入力します（最小10 USDT）。ネットワーク手数料を確認してください。",
+                minimumAmount: "最小金額:",
+                minimumAmountDesc: "最小10 USDT出金が必要",
+                executeWithdrawal: "出金実行",
+                executeWithdrawalDesc: "認証コード認証で出金プロセスを完了します。",
+                profileSettings: "プロフィール・設定",
+                profileInformation: "プロフィール情報",
+                viewProfile: "プロフィール表示",
+                viewProfileDesc: "UID、ニックネーム、メール、携帯番号、参加日を表示するためにプロフィールにアクセスします。",
+                profileManagement: "プロフィール管理",
+                profileManagementDesc: "現在は表示のみです。プロフィール編集機能は将来のアップデートで利用可能になります。",
+                transactionHistory: "取引履歴",
+                transactionHistoryDesc: "整理された履歴タブを通じてすべての活動の包括的な記録にアクセス:",
+                settlementHistory: "決済履歴",
+                settlementHistoryDesc: "タイムスタンプと金額付きのすべての決済取引の完全な記録",
+                tradingHistory: "取引履歴",
+                tradingHistoryDesc: "ボリュームと取引所情報を含む詳細な取引活動ログ",
+                transferHistory: "送金履歴",
+                transferHistoryDesc: "KOLネットワークメンバー間のすべてのUSDT送金の記録",
+                withdrawalHistory: "出金履歴",
+                withdrawalHistoryDesc: "ネットワークとアドレス詳細を含むすべての出金取引の完全なログ",
+                preferences: "設定",
+                themeSettings: "テーマ設定",
+                themeSettingsDesc: "最適な表示体験のためにライトとダークモードテーマを切り替えます。",
+                salesTypeSettings: "販売タイプ設定",
+                salesTypeSettingsDesc: "KOL販売タイプ機能を有効または無効にします。",
+                logoutOption: "ログアウト",
+                logoutOptionDesc: "セッションを安全に終了してログインページに戻ります。",
+                troubleshooting: "トラブルシューティング",
+                commonIssues: "よくある問題",
+                loginProblems: "ログイン問題",
+                loginProblemsDesc: "認証コードを受信できない場合は、メールのスパムフォルダーを確認し、メールアドレスが正しく登録されていることを確認してください。",
+                rateConfigIssues: "レート設定問題",
+                rateConfigIssuesDesc: "KOLパーセンテージが各取引所の合計パーセンテージ制限を超えないことを確認してください。",
+                withdrawalIssues: "出金問題",
+                withdrawalIssuesDesc: "最小出金金額（10 USDT）を満たし、ネットワーク手数料を含む十分な残高があることを確認してください。",
+                dataDisplayIssues: "データ表示問題",
+                dataDisplayIssuesDesc: "決済または取引データが空に見える場合は、ページを更新するか、異なる期間を選択してみてください。",
+                errorMessages: "エラーメッセージ",
+                namubitIdError: "「6桁の数字のみ入力できます。」",
+                namubitIdErrorDesc: "NAMUBIT IDは正確に6桁の数字である必要があります。文字や余分な数字を削除してください。",
+                percentageError: "「合計（％）の値を超えることはできません。」",
+                percentageErrorDesc: "KOL手数料パーセンテージは、各取引所に設定された合計パーセンテージより高くすることはできません。",
+                verificationError: "「無効な認証コードです。再入力してください。」",
+                verificationErrorDesc: "認証コードが期限切れになったか、正しく入力されていない可能性があります。新しいコードを要求してください。",
+                faq: "よくある質問",
+                generalQuestions: "一般的な質問",
+                faq1Q: "NAMUBITシステムでのKOLとは何ですか？",
+                faq1A: "KOL（キーオピニオンリーダー）は、他のユーザーを招待・管理でき、サポートされている取引所での取引活動から手数料を得るユーザーです。",
+                faq2Q: "どの取引所がサポートされていますか？",
+                faq2A: "現在、NAMUBIT KOLシステムはBinanceとOKX取引所をサポートしており、将来的にはより多くの取引所の統合が予定されています。",
+                faq3Q: "手数料はどのように計算されますか？",
+                faq3A: "手数料は次のように計算されます：合計（％）- KOL（％）= ME（％）。KOLパーセンテージを設定すると、あなたの収益（ME）が自動計算されます。",
+                faq4Q: "最小出金金額はいくらですか？",
+                faq4A: "最小出金金額は10 USDTで、選択したブロックチェーンネットワークに応じた適用ネットワーク手数料が加算されます。",
+                faq5Q: "認証コードをリセットするにはどうすればいいですか？",
+                faq5A: "新しい認証コードを受け取るために「送信」ボタンを再度クリックしてください。各コードはセキュリティ目的で一定期間後に期限切れになります。",
+                faq6Q: "設定後にKOLレートを変更できますか？",
+                faq6A: "はい、レート設定モーダルを通じていつでもKOL手数料率を変更できますが、セキュリティのため変更にはメール認証が必要です。"
+            },
+            ko: {
+                title: "NAMUBIT KOL 시스템",
+                tableOfContents: "목차",
+                navOverview: "시스템 개요",
+                navLogin: "로그인 및 인증",
+                navDashboard: "메인 대시보드",
+                navKolManagement: "KOL 관리",
+                navSettlement: "정산 시스템",
+                navTransfer: "송금 및 출금",
+                navProfile: "프로필 및 설정",
+                navTroubleshooting: "문제 해결",
+                navFaq: "자주 묻는 질문",
+                systemOverview: "시스템 개요",
+                importantNote: "중요:",
+                systemDescription: "NAMUBIT KOL 시스템은 가상화폐 거래에서 핵심 오피니언 리더(KOL)를 관리하기 위한 종합적인 플랫폼입니다. 이 시스템은 사용자 관리, KOL, 정산 추적, 금융 거래를 위한 도구를 제공합니다.",
+                keyFeatures: "주요 기능",
+                userManagement: "사용자 관리",
+                userManagementDesc: "안전한 이메일 기반 인증 및 KOL 계층 관리",
+                rateConfiguration: "KOL",
+                rateConfigurationDesc: "다양한 거래소 레벨에 대한 유연한 수수료율 설정",
+                realTimeSettlement: "실시간 정산",
+                realTimeSettlementDesc: "일별, 월별, 누적 정산의 실시간 추적",
+                secureTransactions: "안전한 거래",
+                secureTransactionsDesc: "2FA로 보호된 송금 및 출금과 포괄적인 감사 추적",
+                supportedExchanges: "지원 거래소",
+                loginAuthentication: "로그인 및 인증",
+                securityNotice: "보안 알림:",
+                securityMessage: "이메일 주소로 인증됩니다. 사이트 주소와 인증번호를 누구에게도 공개하지 마십시오.",
+                loginProcess: "로그인 프로세스",
+                step1Title: "로그인 페이지 접속",
+                step1Desc: "NAMUBIT KOL 로그인 페이지로 이동합니다. 상단에 NAMUBIT 로고와 언어 설정이 보입니다.",
+                step2Title: "이메일 주소 입력",
+                step2Desc: "이메일 필드에 등록된 이메일 주소를 입력합니다. 이는 KOL 계정과 연결된 이메일 주소여야 합니다.",
+                step3Title: "인증 코드 요청",
+                step3Desc: "\"인증코드 전송\" 버튼을 클릭합니다. 6자리 인증 코드가 이메일 주소로 전송됩니다.",
+                step4Title: "인증 코드 입력",
+                step4Desc: "이메일을 확인하고 지정된 필드에 6자리 인증 코드를 입력합니다.",
+                step5Title: "로그인 완료",
+                step5Desc: "\"다음\" 버튼을 클릭하여 로그인 프로세스를 완료하고 메인 대시보드에 접속합니다.",
+                mainDashboard: "메인 대시보드",
+                dashboardOverview: "대시보드 개요",
+                dashboardDesc: "메인 대시보드는 KOL 활동, 자산, 성과 지표에 대한 포괄적인 보기를 제공합니다. 이 페이지는 인증된 KOL 사용자에게만 표시됩니다.",
+                keyComponents: "주요 구성 요소",
+                referralCode: "추천 코드",
+                referralCodeDesc: "귀하의 고유 추천 코드(4-8자, 영숫자). 복사 버튼을 사용하여 잠재적 추천인과 공유하세요.",
+                kolLevel: "KOL 레벨",
+                kolLevelDesc: "현재 KOL 레벨 상태 (예: KOL 0, KOL 1 등)",
+                assetOverview: "자산 개요",
+                assetOverviewDesc: "각 거래소별 USDT 보유량 확인 및 각각에 대한 출금 버튼",
+                settlementAmounts: "정산 금액",
+                settlementAmountsDesc: "전일 대비 상승/하락 지표와 함께 오늘의 정산 금액 실시간 표시",
+                kolStatus: "KOL 상태",
+                kolStatusDesc: "확장 가능한 세부 정보 및 관리 옵션이 있는 하위 KOL 및 트레이더 개요",
+                quickActions: "빠른 작업",
+                rateSettingButton: "KOL",
+                rateSettingButtonDesc: "KOL의 수수료율 설정을 위한 모달 열기",
+                registButton: "등록",
+                registButtonDesc: "사용자 지정 코드 및 요율로 계층 하에 새 KOL 등록",
+                withdrawButton: "출금",
+                withdrawButtonDesc: "지원되는 각 거래소의 출금 기능 접근",
+                detailButton: "상세",
+                detailButtonDesc: "포괄적인 정산 및 거래 세부 정보 보기",
+                kolManagement: "KOL 관리",
+                openRateModal: "KOL 모달 열기",
+                openRateModalDesc: "대시보드의 \"KOL\" 버튼을 클릭하여 수수료율 구성 모달을 엽니다.",
+                enterNamubitId: "NAMUBIT ID 입력",
+                enterNamubitIdDesc: "요율을 구성하려는 KOL의 6자리 숫자 NAMUBIT ID를 입력합니다.",
+                restriction: "제한사항:",
+                namubitIdRestriction: "6자리 숫자만 입력할 수 있습니다.",
+                configureRates: "KOL",
+                configureRatesDesc: "각 거래소의 수수료율을 설정합니다. ME(%)는 Total(%) - KOL(%)로 자동 계산됩니다.",
+                exchange: "거래소",
+                totalPercent: "Total (%)",
+                mePercent: "ME (%)",
+                kolPercent: "KOL (%)",
+                autoCalculated: "자동 계산",
+                userInput: "사용자 입력",
+                rateError: "요율 오류:",
+                rateErrorMessage: "Total(%)의 값을 초과할 수 없습니다.",
+                verificationCode: "인증 코드",
+                verificationCodeDesc: "\"전송\"을 클릭하여 이메일로 인증 코드를 받은 후 입력하여 요율 변경을 적용합니다.",
+                codeError: "코드 오류:",
+                codeErrorMessage: "유효하지 않은 인증 코드입니다. 다시 입력해주세요.",
+                kolRegistration: "KOL 등록",
+                openRegistModal: "등록 모달 열기",
+                openRegistModalDesc: "\"등록\" 버튼을 클릭하여 KOL 등록 모달을 엽니다.",
+                enterKolId: "KOL 정보 입력",
+                enterKolIdDesc: "6자리 NAMUBIT ID를 입력하고 고유한 KOL 코드(4-8자, 영숫자만)를 생성합니다.",
+                setInitialRates: "초기 KOL",
+                setInitialRatesDesc: "KOL과 동일한 프로세스를 사용하여 새 KOL의 초기 수수료율을 구성합니다.",
+                confirmRegistration: "등록 확인",
+                confirmRegistrationDesc: "이메일 인증 코드 확인으로 등록을 완료합니다.",
+                settlementSystem: "정산 시스템",
+                settlementOverview: "정산 개요",
+                settlementOverviewDesc: "정산 시스템은 모든 USDT 금액에 대해 정확한 소수점 4자리까지의 정밀도로 모든 금융 활동의 포괄적인 추적을 제공합니다.",
+                settlementTypes: "정산 유형",
+                todaysSettlement: "오늘의 정산",
+                todaysSettlementDesc: "상승/하락 지표가 있는 당일 실시간 정산 금액",
+                monthlySettlement: "월별 정산",
+                monthlySettlementDesc: "선택된 월의 집계 정산 데이터",
+                cumulativeSettlement: "누적 정산",
+                cumulativeSettlementDesc: "모든 기간에 걸친 총 정산 금액",
+                exchangeSettlement: "거래소별 정산",
+                exchangeSettlementDesc: "개별 거래소별로 분해된 정산 금액",
+                searchAndFilter: "검색 및 필터",
+                yearMonthSearch: "연/월 검색",
+                yearMonthSearchDesc: "드롭다운 메뉴를 사용하여 정산 데이터 검색을 위한 특정 연도와 월을 선택합니다.",
+                exchangeFilter: "거래소 필터",
+                exchangeFilterDesc: "특정 거래소(Binance, OKX)로 필터링된 정산 데이터를 봅니다.",
+                dataTable: "데이터 테이블",
+                dataTableDesc: "정산 데이터는 날짜, 총 금액, 거래소별 분석을 포함한 포괄적인 테이블 형식으로 표시됩니다.",
+                transferWithdrawal: "송금 및 출금",
+                transferUsdt: "USDT 송금",
+                selectRecipient: "수신자 선택",
+                selectRecipientDesc: "NAMUBIT ID와 KOL 코드를 사용하여 KOL 네트워크에서 수신자를 선택합니다.",
+                chooseExchange: "출금 거래소 선택",
+                chooseExchangeDesc: "자금을 송금하려는 거래소(Binance 또는 OKX)를 선택합니다.",
+                enterAmount: "금액 입력",
+                enterAmountDesc: "송금할 USDT 금액을 입력합니다. 수수료를 포함한 충분한 잔고가 있는지 확인하세요.",
+                confirmTransfer: "송금 확인",
+                confirmTransferDesc: "이메일 인증 코드 인증으로 송금을 완료합니다.",
+                withdrawalProcess: "출금 프로세스",
+                selectWithdrawExchange: "거래소 선택",
+                selectWithdrawExchangeDesc: "원하는 거래소(Binance 또는 OKX)의 \"출금\" 버튼을 클릭합니다.",
+                checkBalance: "잔고 확인",
+                checkBalanceDesc: "선택한 거래소의 사용 가능한 USDT 잔고와 입금 정보를 검토합니다.",
+                selectNetwork: "네트워크 선택",
+                selectNetworkDesc: "드롭다운 메뉴에서 출금을 위한 블록체인 네트워크를 선택합니다.",
+                enterAddress: "출금 주소 입력",
+                enterAddressDesc: "목적지 지갑 주소와 태그(네트워크에서 필요한 경우)를 입력합니다.",
+                setWithdrawAmount: "출금 금액 설정",
+                setWithdrawAmountDesc: "출금 금액을 입력합니다(최소 10 USDT). 네트워크 수수료를 검토하세요.",
+                minimumAmount: "최소 금액:",
+                minimumAmountDesc: "최소 10 USDT 출금이 필요합니다",
+                executeWithdrawal: "출금 실행",
+                executeWithdrawalDesc: "인증 코드 인증으로 출금 프로세스를 완료합니다.",
+                profileSettings: "프로필 및 설정",
+                profileInformation: "프로필 정보",
+                viewProfile: "프로필 보기",
+                viewProfileDesc: "UID, 닉네임, 이메일, 휴대폰 번호, 가입일을 보기 위해 프로필에 접근합니다.",
+                profileManagement: "프로필 관리",
+                profileManagementDesc: "현재는 보기 전용입니다. 프로필 편집 기능은 향후 업데이트에서 사용 가능합니다.",
+                transactionHistory: "거래 내역",
+                transactionHistoryDesc: "정리된 내역 탭을 통해 모든 활동의 포괄적인 기록에 접근:",
+                settlementHistory: "정산 내역",
+                settlementHistoryDesc: "타임스탬프와 금액이 포함된 모든 정산 거래의 완전한 기록",
+                tradingHistory: "거래 내역",
+                tradingHistoryDesc: "거래량과 거래소 정보가 포함된 상세한 거래 활동 로그",
+                transferHistory: "송금 내역",
+                transferHistoryDesc: "KOL 네트워크 멤버 간 모든 USDT 송금 기록",
+                withdrawalHistory: "출금 내역",
+                withdrawalHistoryDesc: "네트워크와 주소 세부 정보가 포함된 모든 출금 거래의 완전한 로그",
+                preferences: "환경설정",
+                themeSettings: "테마 설정",
+                themeSettingsDesc: "최적의 보기 경험을 위해 라이트와 다크 모드 테마를 전환합니다.",
+                salesTypeSettings: "판매 유형 설정",
+                salesTypeSettingsDesc: "KOL 판매 유형 기능을 활성화 또는 비활성화합니다.",
+                logoutOption: "로그아웃",
+                logoutOptionDesc: "세션을 안전하게 종료하고 로그인 페이지로 돌아갑니다.",
+                troubleshooting: "문제 해결",
+                commonIssues: "일반적인 문제",
+                loginProblems: "로그인 문제",
+                loginProblemsDesc: "인증 코드를 받을 수 없는 경우, 이메일 스팸 폴더를 확인하고 이메일 주소가 올바르게 등록되었는지 확인하세요.",
+                rateConfigIssues: "KOL 문제",
+                rateConfigIssuesDesc: "KOL 퍼센티지가 각 거래소의 총 퍼센티지 제한을 초과하지 않도록 하세요.",
+                withdrawalIssues: "출금 문제",
+                withdrawalIssuesDesc: "최소 출금 금액(10 USDT)을 충족하고 네트워크 수수료를 포함한 충분한 잔고가 있는지 확인하세요.",
+                dataDisplayIssues: "데이터 표시 문제",
+                dataDisplayIssuesDesc: "정산 또는 거래 데이터가 비어 보이는 경우, 페이지를 새로 고치거나 다른 기간을 선택해 보세요.",
+                errorMessages: "오류 메시지",
+                namubitIdError: "\"6자리 숫자만 입력할 수 있습니다.\"",
+                namubitIdErrorDesc: "NAMUBIT ID는 정확히 6자리 숫자여야 합니다. 문자나 추가 숫자를 제거하세요.",
+                percentageError: "\"Total(%)의 값을 초과할 수 없습니다.\"",
+                percentageErrorDesc: "KOL 수수료 퍼센티지는 각 거래소에 설정된 총 퍼센티지보다 높을 수 없습니다.",
+                verificationError: "\"유효하지 않은 인증 코드입니다. 다시 입력해주세요.\"",
+                verificationErrorDesc: "인증 코드가 만료되었거나 잘못 입력되었을 수 있습니다. 새 코드를 요청하세요.",
+                faq: "자주 묻는 질문",
+                generalQuestions: "일반적인 질문",
+                faq1Q: "NAMUBIT 시스템에서 KOL이란 무엇인가요?",
+                faq1A: "KOL(Key Opinion Leader)은 다른 사용자를 초대하고 관리할 수 있으며, 지원되는 거래소에서의 거래 활동으로부터 수수료를 얻는 사용자입니다.",
+                faq2Q: "어떤 거래소가 지원되나요?",
+                faq2A: "현재 NAMUBIT KOL 시스템은 Binance와 OKX 거래소를 지원하며, 향후 더 많은 거래소의 통합이 계획되어 있습니다.",
+                faq3Q: "수수료는 어떻게 계산되나요?",
+                faq3A: "수수료는 다음과 같이 계산됩니다: Total(%) - KOL(%) = ME(%). KOL 퍼센티지를 설정하면 귀하의 수익(ME)이 자동으로 계산됩니다.",
+                faq4Q: "최소 출금 금액은 얼마인가요?",
+                faq4A: "최소 출금 금액은 10 USDT이며, 선택한 블록체인 네트워크에 따른 해당 네트워크 수수료가 추가됩니다.",
+                faq5Q: "인증 코드를 재설정하려면 어떻게 하나요?",
+                faq5A: "새 인증 코드를 받으려면 \"전송\" 버튼을 다시 클릭하세요. 각 코드는 보안상의 이유로 일정 시간이 지나면 만료됩니다.",
+                faq6Q: "설정 후 KOL 요율을 변경할 수 있나요?",
+                faq6A: "네, KOL 모달을 통해 언제든지 KOL 수수료율을 수정할 수 있지만, 보안을 위해 변경 시 이메일 인증이 필요합니다."
+            }
+        };
+
+        // Theme management
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update theme icon
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // Language management
+        function changeLanguage(lang) {
+            // Update all elements with data-key
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update language buttons
+            document.querySelectorAll('.lang-buttons .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`lang-${lang}`).classList.add('active');
+
+            // Save language preference
+            localStorage.setItem('language', lang);
+        }
+
+        // Scroll to top functionality
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Back to top button visibility
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        }
+
+        // Initialize theme and language on page load
+        function initializeSettings() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            // Update theme icon
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+            // Load saved language
+            const savedLanguage = localStorage.getItem('language') || 'en';
+            changeLanguage(savedLanguage);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSettings();
+            
+            // Scroll event for back to top button
+            window.addEventListener('scroll', toggleBackToTop);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
