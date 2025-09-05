@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>NAMUBIT — Trade Binance &amp; OKX with One KYC | Official API Access</title>
+<meta content="Start faster with Quick Registration. One KYC for Binance &amp; OKX, secure custody, and unified trading via official APIs." name="description"/>
+<link href="https://www.namubit.com/en/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://www.namubit.com/en/" hreflang="en" rel="alternate"/>
+<link href="https://www.namubit.com/ja/" hreflang="ja" rel="alternate"/>
+<link href="https://www.namubit.com/" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="NAMUBIT — Trade Binance &amp; OKX with One KYC | Official API Access" property="og:title"/>
+<meta content="Start faster with Quick Registration. One KYC for Binance &amp; OKX, secure custody, and unified trading via official APIs." property="og:description"/>
+<meta content="https://www.namubit.com/en/" property="og:url"/>
+<meta content="https://www.namubit.com/en/og.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="NAMUBIT — Trade Binance &amp; OKX with One KYC | Official API Access" name="twitter:title"/>
+<meta content="Start faster with Quick Registration. One KYC for Binance &amp; OKX, secure custody, and unified trading via official APIs." name="twitter:description"/>
+<meta content="https://www.namubit.com/en/og.png" name="twitter:image"/>
+<link crossorigin="" href="https://www.namubit.com" rel="preconnect"/>
+<link crossorigin="" href="https://www.binance.com" rel="preconnect"/>
+<link crossorigin="" href="https://www.okx.com" rel="preconnect"/>
+<link href="/favicon-32.png" rel="icon" sizes="32x32"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "NAMUBIT", "url": "https://www.namubit.com/", "logo": "https://www.namubit.com/assets/logo.png", "sameAs": ["https://x.com/", "https://www.linkedin.com/", "https://t.me/"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "NAMUBIT", "url": "https://www.namubit.com/en/", "potentialAction": {"@type": "SearchAction", "target": "https://www.namubit.com/en/search?q={query}", "query-input": "required name=query"}}</script>
+<style>
+:root{ --radius:20px; --ring:0 0 0 3px rgba(37,99,235,.35); }
+:root,[data-theme=dark]{ --primary:#2563eb; --primary-600:#1d4ed8; --accent:#ef4444; --spot:#2563eb;
+  --bg:#0b1220; --card:#0f172a; --muted:#64748b; --text:#e2e8f0; --border:#172036;
+  
+  --text-strong:#e6edf3;
+  --text-muted:#cbd5e1;
+  --surface-2:#0b1324;
+  --surface-3:#0f172a;
+  --border-strong:#243249;
+  --up:#10b981; --down:#ef4444; --chip:#0b1324;
+  --shadow:0 10px 30px rgba(0,0,0,.25); --page-grad:radial-gradient(1200px 800px at 20% -10%, #1f2937 0%, #0b1220 55%, #05070d 100%);
+}
+[data-theme=light]{ --primary:#2563eb; --primary-600:#1d4ed8; --accent:#dc2626; --spot:#1d4ed8;
+  --bg:#f8fafc; --card:#ffffff; --muted:#475569; --text:#0f172a; --border:#e2e8f0;
+  
+  --text-strong:#0f172a;
+  --text-muted:#334155;
+  --surface-2:#ffffff;
+  --surface-3:#f8fafc;
+  --border-strong:#cbd5e1;
+  --up:#059669; --down:#b91c1c; --chip:#fff;
+  --shadow:0 8px 20px rgba(2,6,23,.08); --page-grad:linear-gradient(180deg,#f8fafc,#f1f5f9);
+}
+*{box-sizing:border-box} html,body{height:100%} body{
+  margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+  background:var(--page-grad); color:var(--text); line-height:1.5;
+}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+.topbar{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin:6px 0 0}
+.toggle{border:1px solid var(--border);border-radius:999px;padding:6px 10px;cursor:pointer;background:var(--card);color:var(--text-muted);font-weight:700}
+.hero{display:grid;grid-template-columns:1fr .95fr;gap:24px;align-items:stretch;margin-top:16px}
+.headline{font-size:36px;font-weight:800;margin:0}
+.sub{color:var(--text-muted);margin:10px 0 18px}
+.badge{font-size:12px;color:var(--text-muted);background:var(--card);border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:white;padding:12px 16px;border-radius:12px;border:none;font-weight:700;cursor:pointer;transition:.2s transform ease,.2s background ease,.2s box-shadow ease;box-shadow:0 8px 24px color-mix(in oklab, var(--primary), transparent 70%)}
+.btn:hover{background:var(--primary-600);transform:translateY(-1px)}
+.btn:focus-visible{outline:none;box-shadow:var(--ring)}
+.auth{display:flex;flex-direction:column;justify-content:center;min-height:360px;background:linear-gradient(180deg,var(--card),color-mix(in oklab,var(--card) 90%,transparent));border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.auth h2{margin:0 0 10px;font-size:20px}
+.field{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.field label{font-size:13px;color:var(--muted)}
+.input{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text-strong);padding:12px;border-radius:12px;transition:.2s border-color ease,.2s box-shadow ease}
+.input:focus{outline:none;border-color:#2f4466;box-shadow:var(--ring)}
+.input::placeholder{ color:var(--muted) }
+.help{font-size:12px;color:#93c5fd}
+.strip{margin-top:22px}
+.card{background:linear-gradient(180deg,var(--card),color-mix(in oklab,var(--card) 90%,transparent));border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 10px;font-size:16px;color:var(--text-muted);font-weight:700}
+.pill-row{display:flex;gap:12px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);padding:10px 12px;border-radius:12px;transition:.2s transform ease,.2s border-color ease,.2s background ease;background:var(--surface-2);border-color:#2f4466}
+.pill .tag{font-size:12px;padding:4px 8px;border-radius:999px;color:white}
+.tag.futures{background:#ef4444}.tag.spot{background:#2563eb}
+.go{font-size:13px;font-weight:700}
+.sections{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.tile{padding:18px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(17,24,39,.75),rgba(7,11,22,.75));border:1px solid var(--border)}
+.tile h4{margin:0 0 8px;font-size:15px}
+@media (max-width:980px){.hero{grid-template-columns:1fr}.auth{min-height:auto}.sections{grid-template-columns:1fr}}
+.muted{color:var(--text-muted);font-size:14px}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:stretch}
+.balance{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:800;font-size:28px;letter-spacing:.3px}
+.delta{font-weight:700;font-size:14px;padding:4px 8px;border-radius:8px;background:#052e1e;color:#065f46;border:1px solid #065f46}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn.secondary{background:var(--card);color:var(--text-strong);border:1px solid var(--border);box-shadow:none}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+@media (max-width:980px){.grid{grid-template-columns:1fr}.tiles{grid-template-columns:1fr}}
+
+[data-theme=light] .btn.secondary{ color:var(--primary-600); border-color:var(--border-strong); }
+
+/* Light theme readability overrides for tiles */
+[data-theme=light] .tile{
+  background:linear-gradient(180deg, var(--card), color-mix(in oklab, var(--card) 92%, transparent));
+  border-color:var(--border-strong);
+}
+[data-theme=light] .tile h4{ color:var(--text-strong); }
+[data-theme=light] .tile p,
+[data-theme=light] .tile .sub,
+[data-theme=light] .tile .muted{ color:var(--text-muted); }
+
+
+/* === Quick Trade: 2×2 grid + equal-size pills (both mobile & desktop) === */
+.pill-row{ display:grid !important; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+.pill{ width:100%; min-height:48px; padding:10px 14px; justify-content:space-between; align-items:center; text-decoration:none; border-width:2px; }
+.pill:link, .pill:visited{ color:var(--text-strong); }
+.pill strong{ color:var(--text-strong); font-weight:800; }
+.pill .go, .pill .muted{ color:var(--text-muted); }
+[data-theme=light] .pill{ border-color:var(--border-strong); background:var(--card); }
+[data-theme=dark] .pill{ border-color:color-mix(in oklab, var(--text), transparent 55%); background:color-mix(in oklab, var(--card) 90%, transparent); }
+/* keep 2×2 on small screens */
+@media (max-width:520px){
+  .pill-row{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+
+/* --- Market Search Styles --- */
+.search-wrap{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0 6px }
+.search-input{ flex:1 1 260px; min-width:220px; background:var(--card); color:var(--text); border:1px solid var(--border-strong); border-radius:12px; padding:12px 14px; font-size:16px }
+.search-input::placeholder{ color:var(--muted) }
+
+.results{ margin-top:12px; display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px }
+@media (max-width:680px){ .results{ grid-template-columns: 1fr } }
+
+.quote{ border:1px solid var(--border-strong); border-radius:14px; padding:14px; background:linear-gradient(180deg, var(--card), color-mix(in oklab, var(--card) 88%, transparent)) }
+.quote .row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px }
+.quote .ex{ font-weight:800; font-size:14px; letter-spacing:.2px }
+.quote .inst{ font-size:12px; color:var(--muted) }
+.quote .px{ font-weight:900; font-size:22px }
+.quote .cta{ display:inline-flex; gap:8px; align-items:center; margin-top:10px; font-weight:700; text-decoration:none }
+
+.diffs{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; margin-top:12px }
+@media (max-width:680px){ .diffs{ grid-template-columns: 1fr } }
+.diff{ border:1px dashed var(--border-strong); border-radius:12px; padding:12px; background:var(--chip) }
+.diff .label{ font-size:12px; color:var(--muted) }
+.diff .val{ font-weight:800; font-size:16px }
+.pos{ color:var(--up) } .neg{ color:var(--down) }
+
+a:visited{ color: inherit; }
+
+/* Japanese typography */
+body[lang="ja"], :lang(ja){
+  font-family: Meiryo, "Hiragino Kaku Gothic ProN", "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+</style></head><body>
+<header class="container"><div class="topbar">
+<button aria-pressed="false" class="toggle" id="themeToggle" title="Toggle theme">☀︎ / ☾</button>
+</div><div class="badge">Header remains as on namubit.com</div></header>
+<main class="container">
+<section class="hero">
+<div><div class="badge">Clarity · Speed · Safety</div>
+<h1 class="headline">Trade Smarter. Onboard Faster.</h1>
+<p class="sub">One KYC unlocks Binance &amp; OKX. Official APIs, real-time execution, and bank-grade custody.</p>
+<div class="badges"><span class="badge">All-in-One Access</span><span class="badge">Fireblocks Custody</span><span class="badge">AI-Powered Pricing</span></div>
+<div style="margin-top:14px"><a aria-label="Register or Login" class="btn" href="https://www.namubit.com/regist">Get Started — It's Free</a></div>
+</div>
+<aside aria-label="Quick Registration" class="auth">
+<h2>Quick Registration</h2>
+<p class="sub">Enter your <strong>Email/Mobile</strong> to start in seconds.</p>
+<form action="https://www.namubit.com/regist" method="get" novalidate="">
+<div class="field"><label for="identifier">Email / Mobile</label>
+<input autocomplete="username" class="input" id="identifier" name="identifier" placeholder="Enter email or mobile number" type="text"/>
+<div class="help">We'll route you to the right sign-up or login flow.</div></div>
+<button class="btn" type="submit">Continue</button>
+</form><div class="sub" style="margin-top:10px; font-size:12px">
+You'll be redirected to <strong>/regist</strong> to complete.</div></aside></section>
+<section class="strip card" id="quick-trade"><h3>Skip the wait — jump straight to your market</h3>
+<div class="pill-row">
+<a class="pill" href="https://www.namubit.com/futures/binance/BTCUSDT"><span class="tag futures">Futures</span><strong><img alt="BINANCE" src="bin.png" style="height:14px;vertical-align:middle"/></strong><span class="go">Go →</span></a>
+<a class="pill" href="https://www.namubit.com/futures/okx/BTC-USDT-SWAP"><span class="tag futures">Futures</span><strong><img alt="OKX" src="OKX.png" style="height:14px;vertical-align:middle"/></strong><span class="go">Go →</span></a>
+<a class="pill" href="https://www.namubit.com/spot/binance/BTCUSDT"><span class="tag spot">Spot</span><strong><img alt="BINANCE" src="bin.png" style="height:14px;vertical-align:middle"/></strong><span class="go">Go →</span></a>
+<a class="pill" href="https://www.namubit.com/spot/okx/BTC-USDT"><span class="tag spot">Spot</span><strong><img alt="OKX" src="OKX.png" style="height:14px;vertical-align:middle"/></strong><span class="go">Go →</span></a>
+</div></section>
+<!-- NEW: Market Search Section -->
+<section class="strip card" style="margin-top:20px">
+<h3 style="margin:0 0 6px; font-size:22px">Market Search</h3>
+<p class="muted help">Type a symbol only (e.g., BTC). Suffixes like USDT or -USDT-SWAP are optional.</p>
+<div class="search-wrap">
+<input aria-label="Symbol" autocomplete="off" class="search-input" id="sym" inputmode="latin" placeholder="BTC, ETH, SOL…"/>
+<button class="btn" id="go">Search</button>
+<button class="btn secondary" id="reset">Reset</button>
+</div>
+<div aria-live="polite" class="results" id="results"></div>
+<div aria-live="polite" class="diffs" id="diffs"></div>
+</section>
+<section class="sections">
+<div class="tile"><h4>All-in-One Access</h4><p class="sub">One account, one KYC. Trade Binance &amp; OKX in real time via official APIs.</p></div>
+<div class="tile"><h4>Institutional-Grade Custody</h4><p class="sub">Assets safeguarded by Fireblocks, a licensed third-party custodian.</p></div>
+<div class="tile"><h4>AI-Powered Pricing</h4><p class="sub">Live pricing and intelligent routing for speed with maker-level fees.</p></div>
+</section></main>
+<footer class="container"><div class="badge">Footer remains as on namubit.com</div></footer>
+<script>
+    // Theme Toggle
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const storedTheme = localStorage.getItem('theme');
+    if(storedTheme){ root.setAttribute('data-theme', storedTheme); themeBtn?.setAttribute('aria-pressed', storedTheme==='light'); }
+    themeBtn?.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.setAttribute('aria-pressed', next==='light');
+    });
+    if(!storedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+      root.setAttribute('data-theme', 'light');
+      themeBtn?.setAttribute('aria-pressed', true);
+    }
+
+    // --- Market Search Logic ---
+    const input = document.getElementById('sym');
+    const goBtn = document.getElementById('go');
+    const resetBtn = document.getElementById('reset');
+    const resultsEl = document.getElementById('results');
+    const diffsEl = document.getElementById('diffs');
+
+    function normalizeSymbol(raw){
+      if(!raw) return '';
+      let s = (raw + '').toUpperCase().trim();
+      // strip common suffixes and separators
+      s = s.replace(/[^A-Z0-9\-]/g, '');
+      s = s.replace(/-USDT-SWAP$/,'');
+      s = s.replace(/-USDT$/,'');
+      s = s.replace(/USDT$/,'');
+      s = s.replace(/^[\-\s]+|[\-\s]+$/g, '');
+      if(s.includes('-')) s = s.split('-')[0];
+      return s;
+    }
+
+    function symMap(sym){
+      // Build instrument ids for each venue/type
+      return {
+        binance: {
+          spot: { id: sym + 'USDT', trade: `https://www.namubit.com/spot/binance/${sym}USDT` },
+          fut:  { id: sym + 'USDT', trade: `https://www.namubit.com/futures/binance/${sym}USDT` }
+        },
+        okx: {
+          spot: { id: sym + '-USDT', trade: `https://www.namubit.com/spot/okx/${sym}-USDT` },
+          fut:  { id: sym + '-USDT-SWAP', trade: `https://www.namubit.com/futures/okx/${sym}-USDT-SWAP` }
+        }
+      };
+    }
+
+    async function fetchFromNamubit(symbol){
+      // Try a few likely JSON endpoints FIRST (preferred by request)
+      const candidates = [
+        `/market?json=1&symbol=${symbol}`,
+        `/market.json?symbol=${symbol}`,
+        `/api/market?symbol=${symbol}`,
+        `/api/quotes?symbol=${symbol}`,
+        `/api/v1/quotes?symbol=${symbol}`
+      ];
+      for(const url of candidates){
+        try{
+          const r = await fetch(url, { credentials: 'include' });
+          if(r.ok){
+            const ct = r.headers.get('content-type') || '';
+            if(ct.includes('application/json')){
+              const j = await r.json();
+              // Expect shape like { binance:{spot:{price}, fut:{price}}, okx:{spot:{price}, fut:{price}} }
+              if(j && (j.binance || j.okx)) return j;
+            }
+          }
+        }catch(e){ /* ignore and continue */ }
+      }
+      // As a fallback, attempt to scrape /market for embedded JSON
+      try{
+        const r = await fetch('/market', { credentials: 'include' });
+        if(r.ok){
+          const html = await r.text();
+          const m = html.match(/<script[^>]*id=["']__DATA__["'][^>]*>([\s\S]*?)<\/script>/);
+          if(m){
+            const data = JSON.parse(m[1]);
+            if(data && (data.binance || data.okx)) return data;
+          }
+        }
+      }catch(e){ /* ignore */ }
+      return null;
+    }
+
+    async function fetchDirect(map){
+      // Public exchange APIs (used only if NAMUBIT aggregate is unavailable)
+      function j(url){ return fetch(url).then(r => r.json()); }
+      const [biSpot, biFut, okSpot, okFut] = await Promise.all([
+        j(`https://api.binance.com/api/v3/ticker/price?symbol=${map.binance.spot.id}`).catch(() => ({price: NaN})),
+        j(`https://fapi.binance.com/fapi/v1/ticker/price?symbol=${map.binance.fut.id}`).catch(() => ({price: NaN})),
+        j(`https://www.okx.com/api/v5/market/ticker?instId=${map.okx.spot.id}`).catch(() => ({data: []})),
+        j(`https://www.okx.com/api/v5/market/ticker?instId=${map.okx.fut.id}`).catch(() => ({data: []}))
+      ]);
+      const toNum = v => typeof v === 'string' ? parseFloat(v) : (v && v.last ? parseFloat(v.last) : NaN);
+      return {
+        binance: { spot: { price: parseFloat(biSpot.price) }, fut: { price: parseFloat(biFut.price) } },
+        okx: { spot: { price: parseFloat(okSpot.data?.[0]?.last) }, fut: { price: parseFloat(okFut.data?.[0]?.last) } }
+      };
+    }
+
+    async function getQuotes(symbol){
+      const map = symMap(symbol);
+      // 1) Preferred: from NAMUBIT /market (per requirement)
+      const fromN = await fetchFromNamubit(symbol);
+      if(fromN && fromN.binance && fromN.okx){ return { map, quotes: fromN, source: 'namubit' }; }
+      // 2) Fallback: direct from exchanges
+      const direct = await fetchDirect(map);
+      return { map, quotes: direct, source: 'public' };
+    }
+
+    function fmt(n){ if(n==null || !isFinite(n)) return '—'; return Number(n).toLocaleString(undefined, { maximumFractionDigits: 6 }); }
+    function pct(a,b){ if(!isFinite(a) || !isFinite(b)) return NaN; const mid=(a+b)/2; return (a-b)/mid*100; }
+
+    function render(symbol, map, quotes, source){
+      const BIN_ICON = '<img src="bin.png" alt="BINANCE" style="height:14px;vertical-align:middle">';
+      const OKX_ICON = '<img src="OKX.png" alt="OKX" style="height:14px;vertical-align:middle">';
+      resultsEl.innerHTML = '';
+      diffsEl.innerHTML = '';
+
+      const cards = [
+        { key:['binance','spot'], label: BIN_ICON + ' · Spot',     inst: map.binance.spot.id, trade: map.binance.spot.trade },
+        { key:['binance','fut'],  label: BIN_ICON + ' · Futures',  inst: map.binance.fut.id,  trade: map.binance.fut.trade },
+        { key:['okx','spot'],     label: OKX_ICON + ' · Spot',     inst: map.okx.spot.id,     trade: map.okx.spot.trade },
+        { key:['okx','fut'],      label: OKX_ICON + ' · Futures',  inst: map.okx.fut.id,      trade: map.okx.fut.trade },
+      ];
+      const vals = {};
+      for(const c of cards){
+        const [ex, tp] = c.key; const v = quotes?.[ex]?.[tp]?.price; vals[`${ex}_${tp}`] = v;
+        const el = document.createElement('div'); el.className='quote';
+        el.innerHTML = `
+          <div class="row">
+            <div>
+              <div class="ex">${c.label}</div>
+              <div class="inst">${c.inst}</div>
+            </div>
+            <div class="px">${fmt(v)}</div>
+          </div>
+          <a class="cta" href="${c.trade}" aria-label="Trade ${symbol} on ${c.label}">Trade →</a>
+        `;
+        resultsEl.appendChild(el);
+      }
+
+      // Diffs (Binance vs OKX)
+      const spotA = vals['binance_spot'], spotB = vals['okx_spot'];
+      const futA  = vals['binance_fut'],  futB  = vals['okx_fut'];
+      const spotDiff = spotA - spotB; const spotPct = pct(spotA, spotB);
+      const futDiff  = futA  - futB;  const futPct  = pct(futA, futB);
+      const sClass = spotDiff >= 0 ? 'pos' : 'neg';
+      const fClass = futDiff  >= 0 ? 'pos' : 'neg';
+
+      diffsEl.innerHTML = `
+        <div class="diff"><div class="label">Spot Diff (Binance vs OKX)</div>
+          <div class="val ${sClass}">${fmt(spotDiff)} USDT · ${isFinite(spotPct)?spotPct.toFixed(3):'—'}%</div></div>
+        <div class="diff"><div class="label">Futures Diff (Binance vs OKX)</div>
+          <div class="val ${fClass}">${fmt(futDiff)} USDT · ${isFinite(futPct)?futPct.toFixed(3):'—'}%</div></div>`;
+
+      // Optional watermark of source
+      const small = document.createElement('div');
+      small.className='help';
+      small.style.marginTop = '8px';
+      small.textContent = source === 'namubit' ? 'Data source: NAMUBIT /market' : 'Data source: Public exchange APIs (fallback)';
+      diffsEl.appendChild(small);
+    }
+
+    async function run(symbolRaw){
+      const sym = normalizeSymbol(symbolRaw || input.value);
+      if(!sym){ input.focus(); return; }
+      input.value = sym; // show normalized (e.g., BTC)
+      // pre-render skeleton
+      resultsEl.innerHTML = '<div class="muted">Loading…</div>';
+      diffsEl.innerHTML = '';
+      try{
+        const { map, quotes, source } = await getQuotes(sym);
+        render(sym, map, quotes, source);
+      }catch(e){
+        resultsEl.innerHTML = '<div class="muted">No data. Please try another symbol.</div>';
+      }
+    }
+
+    // Events
+    goBtn.addEventListener('click', () => run());
+    resetBtn.addEventListener('click', () => { input.value=''; resultsEl.innerHTML=''; diffsEl.innerHTML=''; input.focus(); });
+    input.addEventListener('keydown', (e) => { if(e.key==='Enter') run(); });
+
+    // Default: preload BTC
+    run('BTC');
+  </script>
+</body></html>
+<script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDildBpKoEJ0jbiYYZauVyZuzzzilnoNpwYyilxR02Y87S153KLl0hw6zf%2BB7P%2F52KArhZmvUk5qOM4ohM%2F28Wl%2BCnP67bw7HejNnSeVdY20wWtu5QOor90vYAFeXPUz9d%2BdhCMmr0FSnM7UQGZJ6%2B%2BLE2s%2FvfOBoZMm7tRNrN8yseZ5nGsoeIW7kbeADzoalQ%2FsddABbxaFsD2pQeFnR7ksUaWDO2l9UjTEMf%2FNGZ0QO22GnB9Y6swBSBMHNUjxS5eroquD4uvaENq2LyhQ2WgZAq%2BxIaVCiA6RAx1cxkHgsQ%2BU4bzLwC0CqibRbCWXCUrvFXghzdAqwE7drdrq%2B5DjAII841nC%2BqWPmDkN7QV9RrP%2Fj%2FujxRPHR%2BOi%2BLOM1ZfzSeXFKNUq4WbnRWLz9skVNSSFcNKPO7oOy4P8OoLncVqAjlznBuMW2%2FfznXBG2t9HZZ39zoWLi8NKmCQc%2BstJPFq0Z%2Bv4nAnZ1dW9G4byxKd4qSJhCF6BhFnJcNVbJOtfspkIgHrfswTSadXC%2B8l0%3D";
+        window.__genspark_locale = "ko-KR";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDildBpKoEJ0jbiYYZauVyZuzzzilnoNpwYyilxR02Y87S153KLl0hw6zf+B7P/52KArhZmvUk5qOM4ohM/28Wl+CnP67bw7HejNnSeVdY20wWtu5QOor90vYAFeXPUz9d+dhCMmr0FSnM7UQGZJ6++LE2s/vfOBoZMm7tRNrN8yseZ5nGsoeIW7kbeADzoalQ/sddABbxaFsD2pQeFnR7ksUaWDO2l9UjTEMf/NGZ0QO22GnB9Y6swBSBMHNUjxS5eroquD4uvaENq2LyhQ2WgZAq+xIaVCiA6RAx1cxkHgsQ+U4bzLwC0CqibRbCWXCUrvFXghzdAqwE7drdrq+5DjAII841nC+qWPmDkN7QV9RrP/j/ujxRPHR+Oi+LOM1ZfzSeXFKNUq4WbnRWLz9skVNSSFcNKPO7oOy4P8OoLncVqAjlznBuMW2/fznXBG2t9HZZ39zoWLi8NKmCQc+stJPFq0Z+v4nAnZ1dW9G4byxKd4qSJhCF6BhFnJcNVbJOtfspkIgHrfswTSadXC+8l0=";
+    </script>
+<script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
